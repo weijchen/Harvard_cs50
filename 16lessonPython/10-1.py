@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-# PN: gasoline db
+# PN: gasoline db, Created Feb. 2017
 # Version 1.0
 # KW: crawler, database create, plotting
 # --------------------------------------------------- libs import
 import sqlite3
-from bs4 import BeautifulSoup as bs
+conn = sqlite3.connect('gasoline.sqlite')
+from bs4 import BeautifulSoup
 import requests
 import numpy as np
-import matplotlib.pyplot as pt
-# --------------------------------------------------- connect db
-conn = sqlite3.connect('gasoline.sqlite')
-
+import matplotlib.pyplot as plt
 # --------------------------------------------------- disp_menu()
 def disp_menu():
 	print("中油歷年油價查詢系統")
@@ -26,7 +24,8 @@ def fetch_data():
 	url = 'http://new.cpc.com.tw/division/mb/oil-more4.aspx'
 
 	html = requests.get(url).text
-	sp = bs(html, 'html.parser')
+	sp = BeautifulSoup(html, 'lxml')
+	# crawl specific data
 	data = sp.find_all('span', {'id':'Showtd'})
 	rows = data[0].find_all('tr')
 
@@ -38,7 +37,7 @@ def fetch_data():
 			prices.append(item)
 
 	for p in prices:
-		sqlstr = "select * from prices where gdate={}".format(p[0])
+		sqlstr = "select * from prices where gdate='{}'".format(p[0])
 		cursor = conn.execute(sqlstr)
 		if len(cursor.fetchall()) == 0:
 			g92 = 0 if p[1] == '' else float(p[1])
@@ -48,6 +47,7 @@ def fetch_data():
 			print(sqlstr)
 			conn.execute(sqlstr)
 			conn.commit()
+	print("Crawl finish!")
 # --------------------------------------------------- disp_10data()
 def disp_10data():
 	cursor = conn.execute('select * from prices order by gdate desc;')    # desc => descending date
@@ -58,7 +58,6 @@ def disp_10data():
 		if n == 10:
 			break
 # --------------------------------------------------- chart()
-
 def chart():
 	data = []
 	cursor = conn.execute("select * from prices order by gdate;")
@@ -69,19 +68,19 @@ def chart():
 	for i in range(0, len(data)):
 		for j in range(0, 3):
 			dataset[j].append(data[i][j+1])
-	w = np.array(dataset[0])
+	w = np.array(dataset[0]) 
 	y = np.array(dataset[1])
 	z = np.array(dataset[2])
-	pt.ylabel("NTD$")
-	pt.xlabel("Weeks ( {} --- {} )".format(data[0][0], data[len(data)-1][0]))
-	pt.plot(x, w, color="blue", label="92")
-	pt.plot(x, y, color="red", label="95")
-	pt.plot(x, z, color="green", label="98")
-	pt.xlim(0, len(data))
-	pt.ylim(10, 40)
-	pt.title("Gasoline Prices Trend (Taiwan)")
-	pt.legend()
-	pt.show()
+	plt.ylabel("NTD$")
+	plt.xlabel("Weeks ( {} --- {} )".format(data[0][0], data[len(data)-1][0]))	# len(data) - 1 -> last item
+	plt.plot(x, w, color="blue", label="92")
+	plt.plot(x, y, color="red", label="95")
+	plt.plot(x, z, color="green", label="98")
+	plt.xlim(0, len(data))
+	plt.ylim(10, 40)
+	plt.title("Gasoline Prices Trend (Taiwan)")
+	plt.legend()
+	plt.show()
 # --------------------------------------------------- disp_alldata()
 def disp_alldata():
 	cursor = conn.execute('select * from prices order by gdate desc;')    # desc => descending date

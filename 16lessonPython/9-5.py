@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# PN: get links contents
+# PN: get links contents, Created Feb, 2017
 # Version 1.0
 # KW: bs4, hrefs in website
-# ---------------------------------------------------
+# Link:
 # --------------------------------------------------- libs import
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 import requests, sys
 # --------------------------------------------------- discription
 if len(sys.argv) < 2:
@@ -14,7 +14,7 @@ if len(sys.argv) < 2:
 url = sys.argv[1]
 
 html = requests.get(url).text
-sp = bs(html, 'html.parser')
+sp = BeautifulSoup(html, 'lxml')
 all_links = sp.find_all('a')
 
 for link in all_links:

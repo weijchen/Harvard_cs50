@@ -1,17 +1,12 @@
-# encoding: utf-8
-# PN: SQLite practice(Students' info database)
+# -*- coding: utf-8 -*-
+# PN: SQLite practice(Students' info database), Created Feb, 2017
 # Version 1.0
-# key word: student db, append, edit, delete, display
-# -------------------------------------------------------------
-	# no = input("請輸入要編輯的學生座號")
-	# sqlstr = "select * from student where stdno={};".format(no)
-	# cursor = conn.execute(sqlstr)
-	# rows = cursor.fetchall()
-# ------------------------------------------------------------- libs import
+# KW: student db, append, edit, delete, display
+# Link: 
+# --------------------------------------------------- lib import
 import sqlite3
-# ------------------------------------------------------------- connect db
 conn = sqlite3.connect('scores.sqlite')
-# ------------------------------------------------------------- functions setting
+# ------------------------------------------------------------- start
 def disp_menu():
 	print("學生資料編輯")
 	print("-----------------")
@@ -43,7 +38,7 @@ def edit_data():
 	cursor = conn.execute(sqlstr)
 	rows = cursor.fetchall()
 	if len(rows) > 0:
-		print("目前的學生姓名:, row[0][1]")
+		print("目前的學生姓名: ", row[0][1])
 		name = input("請輸入學生姓名:")
 		sqlstr = "update student set name='{}' where stdno={};".format(name, no)
 		conn.execute(sqlstr)
