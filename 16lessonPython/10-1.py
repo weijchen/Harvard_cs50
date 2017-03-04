@@ -89,14 +89,14 @@ def disp_alldata():
 		print("日期: {}，92無鉛: {}，95無鉛: {}，95無鉛: {}".format(row[0], row[1], row[2], row[3]))
 		n += 1
 		if n == 20:
-			x = input("請按 Enter 繼續 ...(Q: 回主選單)")
+			x = raw_input("請按 Enter 繼續 ...(Q: 回主選單)")
 			if x == 'Q' or x == 'q':
 				break
 				n = 0
 # --------------------------------------------------- main menu
 while True:
 	disp_menu()
-	choice = int(input("請輸入您的選擇:"))
+	choice = int(raw_input("請輸入您的選擇:"))
 	if choice == 0:
 		break
 	elif choice == 1:
@@ -109,4 +109,4 @@ while True:
 		chart()
 	else:
 		break
-	x = input("Press Enter")
+	x = raw_input("Press Enter")
