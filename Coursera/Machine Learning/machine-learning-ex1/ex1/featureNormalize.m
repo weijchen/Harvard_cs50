@@ -25,25 +25,19 @@ sigma = zeros(1, size(X, 2));
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
+mu = mean(X)
 
-% store mean value in mu
-% store standard deviation in sigma
+sigma = std(X)
 
-
-n = size(X, 2)
-
-for i = 1:n
-  avg = mean(X(:,i));
-  deviation = std(X(:,i));
-  
-  X_norm(:, i) = X_norm(:, i) - avg;
-  X_norm(:, i) = X_norm(:, i) / deviation;
-  
-  mu(i) = avg;
-  sigma(i) = deviation;
+for i = 1 : size(X,2)
+  X_norm(:, i) = (X(:, i) - mu(i)) / sigma(i)
 
 
-end
+
+
+
+
+
 
 % ============================================================
 
