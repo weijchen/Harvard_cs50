@@ -8,7 +8,6 @@ import nltk
 import random	# shuffle DB
 from nltk.corpus import movie_reviews
 # --------------------------------------------------- program
-
 ## -- Create to training --
 documents = []
 for category in movie_reviews.categories():
