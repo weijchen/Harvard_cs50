@@ -92,12 +92,12 @@ int main(int argc, string argv[])
         }
         fflush(file);
 
-        // // check for win
-        // if (won())
-        // {
-        //     printf("ftw!\n");
-        //     break;
-        // }
+        // check for win
+        if (won())
+        {
+            printf("ftw!\n");
+            break;
+        }
 
         // prompt for move
         printf("Tile to move: ");
@@ -202,7 +202,7 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
-    int array[d];
+    // int array[d];
     int temp = d * d;
     for (int i = 0; i < d; i++)
     {
@@ -210,7 +210,7 @@ bool won(void)
         {
             if (board[i][j] < temp)
             {
-                return false
+                return false;
             }
             temp = board[i][j];
 

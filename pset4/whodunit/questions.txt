@@ -1,0 +1,12 @@
+1.  A header file in the C standard library. Define a set of integral type alisases with specific width requirements, along with macros specifying their limits and macro functions to create values of these types.
+2.  These types of variables are only appropriate for code that requires a signed integer type. For example, int8_t is a 8 bits variable. Because bit-length of word might be different between os, we can prevent it with these kind of variable. u- are negative variables.
+3.  BTYE = 1 byte; DWORD = 4 bytes; LONG = 4 bytes; WORD = 2 bytes
+4.  424d
+5.  bfSize is the size of the whole bmp file, biSize is the size of the BITMAPINFOHEADER header file, which is constrained to 40 bytes.
+6.  If biHeight is negative, the bitmap is a top-down DIB(Device Independent Bitmap) with the origin at the upper left corner.
+7.  biBitCount
+8.  The file doesn't esist. / The file is opened in sa mode that doesn't allow other accesses. / The network is down. / The file exists, buy no permissions to it.
+9.  Third argument states how many elements we want to read. Because we're always reading a struct, we only need 1 struct.
+10. 3 -> 1. ((3*3) % 4) = 1 / 2. (4 - 1) % 4 = 3
+11. Set reading function's position to a new position.
+12. One of argument in fseek(), tells the current position of the file pointer.

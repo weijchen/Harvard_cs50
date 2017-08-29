@@ -13,7 +13,7 @@ int main(void)
 {
     string s = get_string();
 
-    // Deal ewith first letter
+    // Deal with first letter
     printf("%c", toupper(s[0]));
 
     for (int i = 0, n = strlen(s); i < n; i++)
